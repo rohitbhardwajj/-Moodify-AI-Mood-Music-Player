@@ -1,12 +1,13 @@
-import React from 'react'
-import MoodOverlayPlayer from "./components/MoodOverlayPlayer"
-
+import React from "react";
+import './App.scss';
+import Header from './components/Header.jsx';
 const App = () => {
-  return (
-    <>
-      <MoodOverlayPlayer></MoodOverlayPlayer>
-    </>
-  )
-}
 
-export default App
+  return (
+    <div className="containerr">
+      <Header />
+    </div>
+  );
+};
+
+export default App;

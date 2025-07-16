@@ -1,0 +1,18 @@
+.headerrr {
+  height: 50%;
+  width: 100%;
+  background-color: red;
+  display: flex;
+}
+
+.headerLft {
+  flex: 1;
+  background-color: lightblue;
+  padding: 10px;
+}
+
+.headerRgt{
+  flex: 1;
+  background-color: lightgreen;
+  padding: 10px;
+}

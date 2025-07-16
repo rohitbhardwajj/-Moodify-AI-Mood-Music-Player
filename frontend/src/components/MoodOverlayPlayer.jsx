@@ -62,10 +62,9 @@ export default function FacialExpression() {
     });
   }, []);
 
-  return (
-    <div style={{ textAlign: 'center', marginTop: '20px' }}>
-      <h2>🧠 Mood Detection (Console Log)</h2>
-      <video ref={videoRef} autoPlay muted width="720" height="560" />
+  return (  
+    <div className="containerVideo">
+      <video ref={videoRef} autoPlay muted  className='rounded-[20px] video'/>
     </div>
   );
 }
