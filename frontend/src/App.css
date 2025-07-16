@@ -1,7 +1,9 @@
 .containerr {
   width: 70%;
-  background-color: #f0f0f0;
+  background-color: rgba(240, 240, 240, 0.4549019608);
   padding: 30px 80px;
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
 }
 
 @media (max-width: 768px) {

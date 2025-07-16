@@ -1,7 +1,9 @@
 .containerr {
   width: 70%;
-  background-color: #f0f0f0;
+  background-color: #f0f0f074;
   padding: 30px 80px;
+  backdrop-filter: blur(10px);
+  
 }
 
 @media (max-width: 768px) {

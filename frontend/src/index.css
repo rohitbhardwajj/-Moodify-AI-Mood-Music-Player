@@ -11,9 +11,11 @@ html ,
 body,#root{
   height: 100%;
   width: 100%;
-  background-color: black ;
+background-image: url('https://morninglightmusic.io/wp-content/uploads/2022/11/Hero-Image-V2-1.jpg');
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 5px 0px ;
+  background-repeat: no-repeat;
+  object-fit: cover;
+  background-size: cover;
 }
