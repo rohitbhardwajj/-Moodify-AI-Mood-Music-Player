@@ -9,7 +9,10 @@ const Header = () => {
         <div className="headerLft">
             <MoodOverlayPlayer />
         </div>
-        <div className="headerRgt"></div>
+        <div className="headerRgt">
+            <h4>Moody Player</h4>
+            <p>Your Current mood is being analyzed in <br /> real time . Enjoy music Tailored to your feelings</p>
+        </div>
     </div>
     </>
   )

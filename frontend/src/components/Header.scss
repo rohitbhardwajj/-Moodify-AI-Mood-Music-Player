@@ -1,18 +1,29 @@
 .headerrr {
   height: 50%;
   width: 100%;
-  background-color: red;
+//   background-color: red;
   display: flex;
 }
 
 .headerLft {
   flex: 1;
-  background-color: lightblue;
+//   background-color: lightblue;
   padding: 10px;
 }
 
 .headerRgt{
   flex: 1;
-  background-color: lightgreen;
+//   background-color: lightgreen;
   padding: 10px;
+}
+@media (max-width: 768px) {
+  .headerrr {
+    flex-direction: column;
+  }
+  
+  .headerLft, .headerRgt {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+    
 }
