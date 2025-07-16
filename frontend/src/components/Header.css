@@ -9,9 +9,51 @@
   padding: 10px;
 }
 
+.headerTitle {
+  background: linear-gradient(to right, blue, purple, pink);
+  -webkit-background-clip: text;
+  font-weight: 900;
+  -webkit-text-fill-color: transparent;
+}
+
+.headerRgt h4 {
+  color: black;
+  font-weight: 600;
+  font-size: 25px;
+  margin-top: 30px;
+}
+
+.headerRgt p {
+  color: black;
+  font-weight: 400;
+  font-size: 16px;
+  margin: 10px 0px;
+}
+
 .headerRgt {
   flex: 1;
   padding: 10px;
+  position: relative;
+}
+
+.headerRgt button {
+  position: absolute;
+  bottom: 10%;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.headerRgt button:hover {
+  background-color: #0056b3;
+}
+
+.headerRgt button:active {
+  scale: 0.95;
 }
 
 @media (max-width: 768px) {
