@@ -17,15 +17,15 @@
     -webkit-text-fill-color: transparent;
 }
 .headerRgt h4{
-    color: white;
-    font-weight: 600;
+   color: rgb(22, 5, 5);
+    font-weight: 800;
     font-size: 25px;
     margin-top: 30px ;
 }
 .headerRgt p{
-    color: white;
+    color: rgb(22, 5, 5);
     font-weight: 400;
-    font-size: 16px;
+    font-size: 20px;
     margin: 10px 0px;
 }
 
@@ -56,11 +56,21 @@
 @media (max-width: 768px) {
   .headerrr {
     flex-direction: column;
+    margin-top: 10px;
   }
   
   .headerLft, .headerRgt {
     width: 100%;
     margin-bottom: 10px;
+  }
+  .headerRgt{
+    position: static;
+    padding: 20px;
+  }
+  .headerRgt button {
+    position: static;
+    width: 100%;
+    margin-top: 10px;
   }
     
 }
