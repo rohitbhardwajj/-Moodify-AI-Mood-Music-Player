@@ -1,14 +1,16 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import './App.scss';
 import Header from './components/Header.jsx';
-const App = () => {
- 
+import FullscreenMood from './components/FullscreenMood.jsx';
+import { AppContext } from './context/AppContext';
 
-  const [mood, setMood] = useState(null);
-  // console.log(mood)
+const App = () => {
+  const { showMoodOverlay } = useContext(AppContext);
+
   return (
     <div className="containerr">
-      <Header mood={mood} setMood={setMood} />
+      <Header />
+      {showMoodOverlay && <FullscreenMood />}
     </div>
   );
 };

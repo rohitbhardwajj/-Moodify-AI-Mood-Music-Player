@@ -1,11 +1,11 @@
-// MoodOverlayPlayer.jsx
-import React, { useRef, useEffect, useImperativeHandle, forwardRef } from 'react';
+import React, { useRef, useEffect, useImperativeHandle, forwardRef, useContext } from 'react';
 import * as faceapi from 'face-api.js';
 import './MoodOverlayPlayer.scss';
-import FullscreenMood from './FullscreenMood';
+import { AppContext } from '../context/AppContext';
 
 const MoodOverlayPlayer = forwardRef((props, ref) => {
   const videoRef = useRef();
+  const { setMood, setShowMoodOverlay } = useContext(AppContext);
 
   const loadModels = async () => {
     const MODEL_URL = '/models';
@@ -38,14 +38,15 @@ const MoodOverlayPlayer = forwardRef((props, ref) => {
         const topMood = Object.keys(expressions).reduce((a, b) =>
           expressions[a] > expressions[b] ? a : b
         );
-        console.log(`🔥 Dominant Mood: ${topMood.toUpperCase()}`);
+        setMood(topMood);
+        setShowMoodOverlay(true);
+        console.log("🔥 Mood detected: ", topMood);
       } else {
         console.log("😐 No face detected");
       }
     }
   };
 
-  // Expose detectMood to parent
   useImperativeHandle(ref, () => ({
     detectMood,
   }));
@@ -60,7 +61,6 @@ const MoodOverlayPlayer = forwardRef((props, ref) => {
     <div className="containerVideo">
       <video ref={videoRef} autoPlay muted className='video' />
     </div>
-  
   );
 });
 

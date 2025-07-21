@@ -1,12 +1,12 @@
-// Header.jsx
-import React, { useRef } from 'react';
+import React, { useRef, useContext } from 'react';
 import './Header.scss';
 import MoodOverlayPlayer from './MoodOverlayPlayer.jsx';
 import Typewriter from "typewriter-effect";
+import { AppContext } from '../context/AppContext';
 
 const Header = () => {
   const moodPlayerRef = useRef();
-  
+
   const detectMoodHandler = () => {
     if (moodPlayerRef.current) {
       moodPlayerRef.current.detectMood();

@@ -1,17 +1,20 @@
-import React from 'react'
-import './FullscreenMood.scss'
-const FullscreenMood = () => {
+import React, { useContext } from 'react';
+import './FullscreenMood.scss';
+import { AppContext } from '../context/AppContext';
 
-    const remove = () => {
-        const element = document.querySelector('.fullscreenMood');
-        element.style.display = 'none';
-    };
+const FullscreenMood = () => {
+  const { mood, setShowMoodOverlay } = useContext(AppContext);
+
+  const remove = () => {
+    setShowMoodOverlay(false);
+  };
+
   return (
     <div className='fullscreenMood'>
-        <h1>Your Current Mood is: Happy </h1>
-        <button onClick={remove}>Get Song Recommendations</button>
+      <h1>Your Current Mood is: <span style={{ color: "#ff4081" }}>{mood || "Neutral"}</span></h1>
+      <button onClick={remove}>Get Song Recommendations</button>
     </div>
-  )
-}
+  );
+};
 
-export default FullscreenMood
+export default FullscreenMood;
