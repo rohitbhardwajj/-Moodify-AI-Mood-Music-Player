@@ -1,8 +1,18 @@
-import React from 'react'
-import './Header.scss'
-import MoodOverlayPlayer from './MoodOverlayPlayer.jsx'
+// Header.jsx
+import React, { useRef } from 'react';
+import './Header.scss';
+import MoodOverlayPlayer from './MoodOverlayPlayer.jsx';
 import Typewriter from "typewriter-effect";
+
 const Header = () => {
+  const moodPlayerRef = useRef();
+
+  const detectMoodHandler = () => {
+    if (moodPlayerRef.current) {
+      moodPlayerRef.current.detectMood();
+    }
+  };
+
   return (
     <>
       <h1 className='headerTitle'>
@@ -19,18 +29,18 @@ const Header = () => {
         />
       </h1>
 
-    <div className='headerrr'>
+      <div className='headerrr'>
         <div className="headerLft">
-            <MoodOverlayPlayer />
+          <MoodOverlayPlayer ref={moodPlayerRef} />
         </div>
         <div className="headerRgt">
-            <h4>Moody Player</h4>
-            <p>Your Current mood is being analyzed in <br /> real time . Enjoy music Tailored to your feelings</p>
-            <button>Start Detecting...</button>
+          <h4>Moody Player</h4>
+          <p>Your Current mood is being analyzed in <br /> real time. Enjoy music Tailored to your feelings</p>
+          <button onClick={detectMoodHandler}>Start Detecting...</button>
         </div>
-    </div>
+      </div>
     </>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;

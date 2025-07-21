@@ -1,11 +1,11 @@
-import React, { useRef, useEffect } from 'react';
+// MoodOverlayPlayer.jsx
+import React, { useRef, useEffect, useImperativeHandle, forwardRef } from 'react';
 import * as faceapi from 'face-api.js';
 import './MoodOverlayPlayer.scss';
 
-export default function FacialExpression() {
+const MoodOverlayPlayer = forwardRef((props, ref) => {
   const videoRef = useRef();
 
-  // Load face-api.js models
   const loadModels = async () => {
     const MODEL_URL = '/models';
     await Promise.all([
@@ -15,7 +15,6 @@ export default function FacialExpression() {
     console.log("✅ Models loaded");
   };
 
-  // Start webcam
   const startVideo = async () => {
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ video: true });
@@ -27,45 +26,40 @@ export default function FacialExpression() {
     }
   };
 
-  // Mood detection every 1 second
-  const detectMood = () => {
-    setInterval(async () => {
-      if (videoRef.current) {
-        const result = await faceapi
-          .detectSingleFace(videoRef.current, new faceapi.TinyFaceDetectorOptions())
-          .withFaceExpressions();
+  const detectMood = async () => {
+    if (videoRef.current) {
+      const result = await faceapi
+        .detectSingleFace(videoRef.current, new faceapi.TinyFaceDetectorOptions())
+        .withFaceExpressions();
 
-        if (result && result.expressions) {
-          const expressions = result.expressions;
-
-          console.clear(); // Optional: clears previous logs
-          console.log("🎯 Expression Confidence (%):");
-          Object.entries(expressions).forEach(([mood, confidence]) => {
-            console.log(`${mood.toUpperCase()}: ${(confidence * 100).toFixed(2)}%`);
-          });
-
-          const topMood = Object.keys(expressions).reduce((a, b) =>
-            expressions[a] > expressions[b] ? a : b
-          );
-          console.log(`🔥 Dominant Mood: ${topMood.toUpperCase()}`);
-        } else {
-          console.log("😐 No face detected");
-        }
+      if (result && result.expressions) {
+        const expressions = result.expressions;
+        const topMood = Object.keys(expressions).reduce((a, b) =>
+          expressions[a] > expressions[b] ? a : b
+        );
+        console.log(`🔥 Dominant Mood: ${topMood.toUpperCase()}`);
+      } else {
+        console.log("😐 No face detected");
       }
-    }, 1000); // every 1 sec
+    }
   };
 
-  // When component mounts
+  // Expose detectMood to parent
+  useImperativeHandle(ref, () => ({
+    detectMood,
+  }));
+
   useEffect(() => {
     loadModels().then(() => {
       startVideo();
-      detectMood();
     });
   }, []);
 
-  return (  
+  return (
     <div className="containerVideo">
-      <video ref={videoRef} autoPlay muted  className='video'/>
+      <video ref={videoRef} autoPlay muted className='video' />
     </div>
   );
-}
+});
+
+export default MoodOverlayPlayer;
