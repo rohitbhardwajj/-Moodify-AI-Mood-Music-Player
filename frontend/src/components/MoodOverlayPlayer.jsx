@@ -2,6 +2,7 @@
 import React, { useRef, useEffect, useImperativeHandle, forwardRef } from 'react';
 import * as faceapi from 'face-api.js';
 import './MoodOverlayPlayer.scss';
+import FullscreenMood from './FullscreenMood';
 
 const MoodOverlayPlayer = forwardRef((props, ref) => {
   const videoRef = useRef();
@@ -59,6 +60,7 @@ const MoodOverlayPlayer = forwardRef((props, ref) => {
     <div className="containerVideo">
       <video ref={videoRef} autoPlay muted className='video' />
     </div>
+  
   );
 });
 
