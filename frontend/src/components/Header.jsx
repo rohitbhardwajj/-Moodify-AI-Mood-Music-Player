@@ -6,7 +6,7 @@ import Typewriter from "typewriter-effect";
 
 const Header = () => {
   const moodPlayerRef = useRef();
-
+  
   const detectMoodHandler = () => {
     if (moodPlayerRef.current) {
       moodPlayerRef.current.detectMood();
