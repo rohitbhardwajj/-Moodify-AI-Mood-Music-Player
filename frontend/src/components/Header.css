@@ -66,6 +66,7 @@
   .headerrr {
     flex-direction: column;
     margin-top: 10px;
+    background-color: none;
   }
   .headerLft, .headerRgt {
     width: 100%;
