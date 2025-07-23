@@ -6,22 +6,37 @@ const path = require('path');
 const upload = multer({ storage: multer.memoryStorage() });
 
 const folderPath = path.join(__dirname, '../../public');
+const outputSongUrl = [];
 
 routes.post('/upload', (req, res) => {
     fs.readdir(folderPath, (err, files) => {
         if (err) {
-            console.error(' Error reading folder:', err);
+            console.error('Error reading folder:', err);
             return res.status(500).send("Error reading folder");
         }
-        files.forEach(file => {
-            if (path.extname(file).toLowerCase() === '.mp3') {
-                console.log('MP3 File:', file);
-            }
-        });
 
-        res.send("MP3 files listed in console");
+        Promise.all(files.map(file => {
+            const filePath = path.join(folderPath, file);
+            const fileBuffer = fs.readFileSync(filePath);
+
+            return uploadedFile({
+                originalname: file,
+                buffer: fileBuffer
+            });
+        }))
+        .then(results => {
+            results.forEach(result => outputSongUrl.push(result.url));
+            console.log("MP3 files:", outputSongUrl);
+            res.send("MP3 files listed in console");
+        })
+        .catch(err => {
+            console.error('Error uploading files:', err);
+            res.status(500).send("Error uploading files");
+        });
     });
 });
+
+
 
 // routes.post('/song', upload.single('audio'), (req, res) => {
 //     console.log("Req body:", req.body);
