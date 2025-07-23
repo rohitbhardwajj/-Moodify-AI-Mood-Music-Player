@@ -10,10 +10,11 @@ html ,
 body,#root{
   height: 100%;
   width: 100%;
-background-image: url('https://c4.wallpaperflare.com/wallpaper/1004/4/846/synthwave-background-wallpaper-preview.jpg');
+/* background-image: url('https://c4.wallpaperflare.com/wallpaper/1004/4/846/synthwave-background-wallpaper-preview.jpg'); */
   display: flex;
   justify-content: center;
-  align-items: center;
+  background-color: black;
+  /* align-items: center; */
   background-repeat: no-repeat;
   object-fit: cover;
   background-size: cover;

@@ -1,45 +1,50 @@
 .headerrr {
   height: 50%;
   width: 100%;
-  // background-color: red;
+  background-color: rgb(35, 29, 29);
   display: flex;
+  border-radius: 10px;
 }
 
 .headerLft {
   flex: 1;
-//   background-color: lightblue;
+  // background-color: lightblue;
   padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .headerTitle{
-    background:  linear-gradient(to right, blue, purple , pink);
-    -webkit-background-clip: text;
+    // background:  linear-gradient(to right, blue, purple , pink);
+    // -webkit-background-clip: text;
     font-weight: 900;
-    -webkit-text-fill-color: transparent;
+    // -webkit-text-fill-color: transparent;
 }
 .headerRgt h4{
-   color: blue;
+   color: rgb(199, 184, 184);
     font-weight: 800;
     font-size: 25px;
     margin-top: 30px ;
 
 }
 .headerRgt p{
-    color: purple;
+    // color: purple;
+    color: rgb(199, 184, 184);
     font-weight: 400;
-    font-size: 20px;
+    font-size: 15px;
     margin: 10px 0px;
 }
 
 .headerRgt{
   flex: 1;
-//   background-color: lightgreen;
+  // background-color: lightgreen;
   padding: 10px;
   position: relative;
 }
 .headerRgt button{
     position: absolute;
-    bottom: 10%;
-    padding: 10px 20px;
+    bottom: 20%;
+    padding: 12px 13px;
     background: linear-gradient(to right, blue, purple);
     color: white;
     border: none;

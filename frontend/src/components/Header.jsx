@@ -19,7 +19,6 @@ const Header = () => {
         <Typewriter
           options={{
             strings: [
-              "Welcome to Moody Player",
               "Your Mood, Your Music",
             ],
             autoStart: true,
@@ -34,7 +33,7 @@ const Header = () => {
         </div>
         <div className="headerRgt">
           <h4>Moody Player</h4>
-          <p>Your Current mood is being analyzed in <br /> real time. Enjoy music Tailored to your feelings</p>
+          <p>Your Current mood is being analyzed in  real time. Enjoy music Tailored to your feelings</p>
           <button onClick={detectMoodHandler}>Start Detecting...</button>
         </div>
       </div>
