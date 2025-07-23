@@ -1,9 +1,9 @@
+// MoodOverlayPlayer.jsx
+
 import React, { useRef, useEffect, useImperativeHandle, forwardRef, useContext } from 'react';
 import * as faceapi from 'face-api.js';
 import './MoodOverlayPlayer.scss';
 import { AppContext } from '../context/AppContext';
-
-
 
 const MoodOverlayPlayer = forwardRef((props, ref) => {
   const videoRef = useRef();
@@ -11,11 +11,15 @@ const MoodOverlayPlayer = forwardRef((props, ref) => {
 
   const loadModels = async () => {
     const MODEL_URL = '/models';
-    await Promise.all([
-      faceapi.nets.tinyFaceDetector.loadFromUri(MODEL_URL),
-      faceapi.nets.faceExpressionNet.loadFromUri(MODEL_URL),
-    ]);
-    console.log("✅ Models loaded");
+    try {
+      await Promise.all([
+        faceapi.nets.tinyFaceDetector.loadFromUri(MODEL_URL),
+        faceapi.nets.faceExpressionNet.loadFromUri(MODEL_URL),
+      ]);
+      console.log("✅ Models loaded");
+    } catch (err) {
+      console.error("❌ Failed to load models:", err);
+    }
   };
 
   const startVideo = async () => {
@@ -30,38 +34,34 @@ const MoodOverlayPlayer = forwardRef((props, ref) => {
   };
 
   const detectMood = async () => {
-    if (videoRef.current) {
-      const result = await faceapi
-        .detectSingleFace(videoRef.current, new faceapi.TinyFaceDetectorOptions())
-        .withFaceExpressions();
+    if (!videoRef.current) return;
 
-      if (result && result.expressions) {
-        const expressions = result.expressions;
-        const topMood = Object.keys(expressions).reduce((a, b) =>
-          expressions[a] > expressions[b] ? a : b
-        );
-        setMood(topMood);
-        setShowMoodOverlay(true);
-        console.log("🔥 Mood detected: ", topMood);
-      } else {
-        console.log("😐 No face detected");
-      }
+    const result = await faceapi
+      .detectSingleFace(videoRef.current, new faceapi.TinyFaceDetectorOptions())
+      .withFaceExpressions();
+
+    if (result?.expressions) {
+      const expressions = result.expressions;
+      const topMood = Object.keys(expressions).reduce((a, b) =>
+        expressions[a] > expressions[b] ? a : b
+      );
+      setMood(topMood);
+      setShowMoodOverlay(true);
+      console.log("🔥 Mood detected:", topMood);
+    } else {
+      console.log("😐 No face detected");
     }
   };
 
-  useImperativeHandle(ref, () => ({
-    detectMood,
-  }));
+  useImperativeHandle(ref, () => ({ detectMood }));
 
   useEffect(() => {
-    loadModels().then(() => {
-      startVideo();
-    });
+    loadModels().then(() => startVideo());
   }, []);
 
   return (
     <div className="containerVideo">
-      <video ref={videoRef} autoPlay muted className='video' />
+      <video ref={videoRef} autoPlay muted className="video" />
     </div>
   );
 });
