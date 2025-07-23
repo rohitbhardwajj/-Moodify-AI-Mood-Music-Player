@@ -1,7 +1,7 @@
 .video {
-  -o-object-fit: cover;
-     object-fit: cover;
-  width: 90%;
-  height: 90%;
-  border-radius: 20px;
+  -o-object-fit: fill;
+     object-fit: fill;
+  width: 100% !important;
+  height: 100% !important;
+  border-radius: 10px;
 }/*# sourceMappingURL=MoodOverlayPlayer.css.map */
