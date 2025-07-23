@@ -11,7 +11,7 @@ const FullscreenMood = () => {
 
   return (
     <div className='fullscreenMood'>
-      <h1>Your Current Mood is: <span style={{ color: "#ff4081" }}>{mood || "Neutral"}</span></h1>
+      <h1 className='fullscreenMood__title'>Your Current Mood is: <span style={{ color: "#ff4081" }}>{mood || "Neutral"}</span></h1>
       <button onClick={remove}>Get Song Recommendations</button>
     </div>
   );
