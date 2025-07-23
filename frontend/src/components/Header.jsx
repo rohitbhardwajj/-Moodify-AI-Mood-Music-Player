@@ -21,7 +21,6 @@ const Header = () => {
             strings: [
               "Welcome to Moody Player",
               "Your Mood, Your Music",
-              "Feel the Beat of Your Emotions"
             ],
             autoStart: true,
             loop: true,

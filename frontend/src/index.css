@@ -4,7 +4,6 @@
   margin: 0;
   padding: 0;
   font-family: "Poppins", sans-serif;
-  
 }
 
 html ,
@@ -18,4 +17,5 @@ background-image: url('https://c4.wallpaperflare.com/wallpaper/1004/4/846/synthw
   background-repeat: no-repeat;
   object-fit: cover;
   background-size: cover;
+  box-sizing: border-box;
 }
