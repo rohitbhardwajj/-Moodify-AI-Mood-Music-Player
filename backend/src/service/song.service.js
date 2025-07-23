@@ -10,8 +10,8 @@ const imagekit = new ImageKit({
 const uploadedFile = (file) => {
     return new Promise((res, rej) => {
         imagekit.upload({
-           file: file.buffer,             // ✅ Pass buffer here
-            fileName: file.originalname,   // ✅ And name here
+           file: file.buffer,             
+            fileName: file.originalname,   
             folder: "/songs"
 
         }, function(error, result) {
