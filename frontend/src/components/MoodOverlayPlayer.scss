@@ -4,3 +4,19 @@
     height: 100% !important;
     border-radius: 10px;
 }
+.containerVideo {
+  position: relative;
+}
+
+.errorText {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(255, 0, 0, 0.8);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  z-index: 10;
+}

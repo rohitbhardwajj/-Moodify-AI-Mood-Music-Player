@@ -1,6 +1,13 @@
 // MoodOverlayPlayer.jsx
 
-import React, { useRef, useEffect, useImperativeHandle, forwardRef, useContext } from 'react';
+import React, {
+  useRef,
+  useEffect,
+  useImperativeHandle,
+  forwardRef,
+  useContext,
+  useState,
+} from 'react';
 import * as faceapi from 'face-api.js';
 import './MoodOverlayPlayer.scss';
 import { AppContext } from '../context/AppContext';
@@ -8,6 +15,7 @@ import { AppContext } from '../context/AppContext';
 const MoodOverlayPlayer = forwardRef((props, ref) => {
   const videoRef = useRef();
   const { setMood, setShowMoodOverlay } = useContext(AppContext);
+  const [errorMsg, setErrorMsg] = useState('');
 
   const loadModels = async () => {
     const MODEL_URL = '/models';
@@ -16,9 +24,9 @@ const MoodOverlayPlayer = forwardRef((props, ref) => {
         faceapi.nets.tinyFaceDetector.loadFromUri(MODEL_URL),
         faceapi.nets.faceExpressionNet.loadFromUri(MODEL_URL),
       ]);
-      console.log("✅ Models loaded");
+      console.log('✅ Models loaded');
     } catch (err) {
-      console.error("❌ Failed to load models:", err);
+      console.error('❌ Failed to load models:', err);
     }
   };
 
@@ -29,11 +37,12 @@ const MoodOverlayPlayer = forwardRef((props, ref) => {
         videoRef.current.srcObject = stream;
       }
     } catch (err) {
-      console.error("❌ Error starting camera:", err);
+      console.error('❌ Error starting camera:', err);
     }
   };
 
   const detectMood = async () => {
+    setErrorMsg(''); // clear old errors
     if (!videoRef.current) return;
 
     const result = await faceapi
@@ -47,9 +56,10 @@ const MoodOverlayPlayer = forwardRef((props, ref) => {
       );
       setMood(topMood);
       setShowMoodOverlay(true);
-      console.log("🔥 Mood detected:", topMood);
+      console.log('🔥 Mood detected:', topMood);
     } else {
-      console.log("😐 No face detected");
+      console.log('😐 No face detected');
+      setErrorMsg('😐 Please show your face clearly to the camera.');
     }
   };
 
@@ -62,6 +72,7 @@ const MoodOverlayPlayer = forwardRef((props, ref) => {
   return (
     <div className="containerVideo">
       <video ref={videoRef} autoPlay muted className="video" />
+      {errorMsg && <p className="errorText">{errorMsg}</p>}
     </div>
   );
 });
