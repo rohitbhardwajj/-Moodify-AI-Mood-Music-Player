@@ -1,32 +1,35 @@
 .headerrr {
   height: 50%;
   width: 100%;
-  background-color: rgb(35, 29, 29);
+  background-color: #214057;
   display: flex;
   border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .headerLft {
   flex: 1;
   padding: 10px;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: center !important;
+  align-items: center !important;
 }
 
 .headerTitle {
   font-weight: 900;
+  color: rgba(245, 222, 179, 0.845);
+  font-family: Georgia, "Times New Roman", Times, serif;
 }
 
 .headerRgt h4 {
-  color: rgb(199, 184, 184);
+  color: rgba(245, 222, 179, 0.845);
   font-weight: 800;
   font-size: 25px;
   margin-top: 30px;
 }
 
 .headerRgt p {
-  color: rgb(199, 184, 184);
+  color: rgba(245, 222, 179, 0.475);
   font-weight: 400;
   font-size: 15px;
   margin: 10px 0px;
@@ -41,8 +44,9 @@
 .headerRgt button {
   position: absolute;
   bottom: 20%;
-  padding: 12px 13px;
-  background: linear-gradient(to right, blue, purple);
+  padding: 12px 8px;
+  background: linear-gradient(to right, rgb(22, 156, 197), rgb(2, 74, 98));
+  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.2);
   color: white;
   border: none;
   border-radius: 5px;
@@ -55,7 +59,7 @@
 }
 
 .headerRgt button:active {
-  scale: 0.95;
+  scale: 0.8;
 }
 
 @media (max-width: 768px) {
