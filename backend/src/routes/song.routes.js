@@ -5,7 +5,7 @@ const fs = require('fs');
 const path = require('path');
 const upload = multer({ storage: multer.memoryStorage() });
 
-const folderPath = path.join(__dirname, '../../public/excitement');
+const folderPath = path.join(__dirname, '../../public/neutral');
 const songModel  = require('../models/song.model')
 
 routes.post('/upload', (req, res) => {
@@ -30,7 +30,7 @@ routes.post('/upload', (req, res) => {
                 songModel.create({
                     name: results.name,
                     url: results.url,
-                    mood: "excitement" // Assuming a default mood, you can change this as needed
+                    mood: "sad" // Assuming a default mood, you can change this as needed
                 });
             });
             res.send("MP3 files listed in console");

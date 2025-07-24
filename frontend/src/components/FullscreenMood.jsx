@@ -14,6 +14,17 @@ const FullscreenMood = () => {
   const GetAllSSongs = async () => {
     try {
       const response = await axios.get('http://localhost:3000/songs');
+      if(mood !== 'excited') {
+         response.data = response.data.filter(song => song.mood === mood);
+      }else{
+        setAllSongData(response.data);
+        return;
+      }
+      
+      if (response.data.length === 0) {
+        alert("No songs found for this mood");
+        return;
+      }
       setAllSongData(response.data);
       console.log(response.data);
     } catch (error) {
