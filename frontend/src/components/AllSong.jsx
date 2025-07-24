@@ -1,38 +1,44 @@
-import React, { useRef, useState } from 'react';
-import './AllSong.scss';
+import React, { useRef, useState, useContext } from "react";
+import "./AllSong.scss";
 import { FaPlay, FaPause } from "react-icons/fa";
+import { AppContext } from "../context/AppContext";
 
 const AllSong = () => {
+  const { allSongData } = useContext(AppContext);
+  const [playingIndex, setPlayingIndex] = useState(null);
   const audioRef = useRef(null);
-  const [isPlaying, setIsPlaying] = useState(false);
 
-  const togglePlay = () => {
-    if (!audioRef.current) return;
+  const togglePlay = (index) => {
+    const audio = document.getElementById(`audio-${index}`);
 
-    if (isPlaying) {
-      audioRef.current.pause();
+    if (!audio) return;
+
+    if (playingIndex === index) {
+      audio.pause();
+      setPlayingIndex(null);
     } else {
-      audioRef.current.play();
+      // pause previous if playing
+      if (playingIndex !== null) {
+        const prevAudio = document.getElementById(`audio-${playingIndex}`);
+        if (prevAudio) prevAudio.pause();
+      }
+
+      audio.play();
+      setPlayingIndex(index);
     }
-    setIsPlaying(!isPlaying);
   };
 
   return (
-    <div className='allSongContainer'>
-      <div className="songdiv">
-        <audio ref={audioRef} src="/hone.mp3" />
-        <h3>Click to {isPlaying ? 'pause' : 'play'}</h3>
-        <div onClick={togglePlay}>
-          {isPlaying ? <FaPause /> : <FaPlay />}
+    <div className="allSongContainer">
+      {allSongData?.map((song, idx) => (
+        <div key={idx} className="songdiv">
+          <audio id={`audio-${idx}`} src={song.url} />
+          <h3>{song.name.split("_")[0]}</h3> 
+          <div onClick={() => togglePlay(idx)}>
+            {playingIndex === idx ? <FaPause /> : <FaPlay />}
+          </div>
         </div>
-      </div>
-
-      {/* Extra song without functionality */}
-      <div className="songdiv">
-        <audio src="/hone.mp3" />
-        <h3>Click to play</h3>
-        <FaPlay />
-      </div>
+      ))}
     </div>
   );
 };

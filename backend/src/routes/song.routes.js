@@ -6,7 +6,6 @@ const path = require('path');
 const upload = multer({ storage: multer.memoryStorage() });
 
 const folderPath = path.join(__dirname, '../../public/excitement');
-const outputSongUrl = [];
 const songModel  = require('../models/song.model')
 
 routes.post('/upload', (req, res) => {
@@ -26,14 +25,14 @@ routes.post('/upload', (req, res) => {
             });
         }))
         .then(results => {
-            results.forEach(result => {
+            results.forEach(results => {
+                console.log(results);
                 songModel.create({
-                    name: result.name,
-                    url: result.url,
+                    name: results.name,
+                    url: results.url,
                     mood: "excitement" // Assuming a default mood, you can change this as needed
                 });
             });
-            console.log("MP3 files:", outputSongUrl);
             res.send("MP3 files listed in console");
         })
         .catch(err => {
@@ -42,6 +41,16 @@ routes.post('/upload', (req, res) => {
         });
     });
 });
+
+routes.get('/songs' , async(req , res)=>{
+    try{
+        const songs = await songModel.find();
+        res.json(songs);
+    } catch (error) {
+        console.error('Error fetching songs:', error);
+        res.status(500).send("Error fetching songs");
+    }
+})
 
 
 

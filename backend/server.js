@@ -3,10 +3,12 @@ const app = express()
 const connectDb = require('./src/db/db')
 const songRoutes = require('./src/routes/song.routes');
 require('dotenv').config();
+const cors = require('cors');
+connectDb();
 
 connectDb();
 
-
+app.use(cors()); // ✅ allow all origins
 app.use(express.json());
 app.use('/', songRoutes);
 
