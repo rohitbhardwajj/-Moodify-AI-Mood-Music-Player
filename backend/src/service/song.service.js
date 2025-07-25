@@ -1,10 +1,10 @@
 
 const ImageKit = require("imagekit");
-
+require('dotenv').config();
 const imagekit = new ImageKit({
-    publicKey : "public_q9Ji2iYhYOs4h92poLfzLIble34=",
-    privateKey : "private_kO79TwlaqtMuiEgguL8Uitis/Ps=",
-    urlEndpoint : "https://ik.imagekit.io/72xqhcqmo"
+    publicKey : process.env.PUBLIC_KEY,
+    privateKey : process.env.PRIVATE_KEY,
+    urlEndpoint : process.env.URL_ENDPOINT
 });
 
 const uploadedFile = (file) => {
