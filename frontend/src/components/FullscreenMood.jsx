@@ -12,7 +12,7 @@ const FullscreenMood = () => {
 
   const GetAllSSongs = async () => {
     try {
-      const response = await axios.get('http://localhost:3000/songs');
+      const response = await axios.get('https://moodify-ai-mood-music-player.onrender.com/songs');
 
       let currentMood = mood.toLowerCase();
       if (currentMood === 'surprised') {
