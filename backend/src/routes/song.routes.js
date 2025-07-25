@@ -8,6 +8,10 @@ const upload = multer({ storage: multer.memoryStorage() });
 const folderPath = path.join(__dirname, '../../public/angry');
 const songModel  = require('../models/song.model')
 
+routes.get('/ping', (req, res) => {
+  res.status(200).send('OK');
+});
+
 routes.post('/uploads', (req, res) => {
     fs.readdir(folderPath, (err, files) => {
         if (err) {
