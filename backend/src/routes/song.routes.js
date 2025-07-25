@@ -5,10 +5,10 @@ const fs = require('fs');
 const path = require('path');
 const upload = multer({ storage: multer.memoryStorage() });
 
-const folderPath = path.join(__dirname, '../../public/neutral');
+const folderPath = path.join(__dirname, '../../public/angry');
 const songModel  = require('../models/song.model')
 
-routes.post('/upload', (req, res) => {
+routes.post('/uploads', (req, res) => {
     fs.readdir(folderPath, (err, files) => {
         if (err) {
             console.error('Error reading folder:', err);
@@ -30,7 +30,7 @@ routes.post('/upload', (req, res) => {
                 songModel.create({
                     name: results.name,
                     url: results.url,
-                    mood: "sad" // Assuming a default mood, you can change this as needed
+                    mood: "angry" 
                 });
             });
             res.send("MP3 files listed in console");

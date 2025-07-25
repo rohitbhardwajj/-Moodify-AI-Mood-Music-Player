@@ -12,7 +12,7 @@ const uploadedFile = (file) => {
         imagekit.upload({
            file: file.buffer,             
             fileName: file.originalname,   
-            folder: "/songs"
+            folder: "/angry-songs"
 
         }, function(error, result) {
             if (error) {

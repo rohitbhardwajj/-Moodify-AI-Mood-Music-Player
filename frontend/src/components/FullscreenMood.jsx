@@ -1,32 +1,35 @@
 import React, { useContext } from 'react';
 import './FullscreenMood.scss';
 import { AppContext } from '../context/AppContext';
-
 import axios from 'axios';
 
 const FullscreenMood = () => {
-  const { mood, setShowMoodOverlay } = useContext(AppContext);
+  const { mood, setMood, setShowMoodOverlay, setAllSongData } = useContext(AppContext);
 
   const remove = () => {
     setShowMoodOverlay(false);
   };
-  const { allSongData, setAllSongData } = useContext(AppContext);
+
   const GetAllSSongs = async () => {
     try {
       const response = await axios.get('http://localhost:3000/songs');
-      if(mood !== 'excited') {
-         response.data = response.data.filter(song => song.mood === mood);
-      }else{
-        setAllSongData(response.data);
-        return;
+
+      let currentMood = mood.toLowerCase();
+      if (currentMood === 'surprised') {
+        currentMood = 'excitement';
+        setMood('excitement');
       }
-      
-      if (response.data.length === 0) {
+
+      const filteredSongs = response.data.filter(song => song.mood === currentMood);
+
+      if (filteredSongs.length === 0) {
         alert("No songs found for this mood");
         return;
       }
-      setAllSongData(response.data);
-      console.log(response.data);
+
+      setAllSongData(filteredSongs);
+      console.log(filteredSongs);
+      alert("Enjoy your music!");
     } catch (error) {
       console.error("Error fetching songs:", error);
     }
@@ -34,8 +37,12 @@ const FullscreenMood = () => {
 
   return (
     <div className='fullscreenMood'>
-      <h1 className='fullscreenMood__title'>Your Current Mood is: <span style={{ color: "#ff4081" }}>{mood || "Neutral"}</span></h1>
-      <button onClick={ ()=>{ GetAllSSongs(); remove(); }}>Get Song Recommendations</button>
+      <h1 className='fullscreenMood__title'>
+        Your Current Mood is: <span style={{ color: "#ff4081" }}>{mood || "Neutral"}</span>
+      </h1>
+      <button onClick={() => { GetAllSSongs(); remove(); }}>
+        Get Song Recommendations
+      </button>
     </div>
   );
 };

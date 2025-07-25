@@ -6,9 +6,7 @@ require('dotenv').config();
 const cors = require('cors');
 connectDb();
 
-connectDb();
-
-app.use(cors()); // ✅ allow all origins
+app.use(cors()); 
 app.use(express.json());
 app.use('/', songRoutes);
 
