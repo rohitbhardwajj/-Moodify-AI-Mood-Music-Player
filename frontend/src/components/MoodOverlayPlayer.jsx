@@ -1,5 +1,3 @@
-// MoodOverlayPlayer.jsx
-
 import React, {
   useRef,
   useEffect,
@@ -16,6 +14,7 @@ const MoodOverlayPlayer = forwardRef((props, ref) => {
   const videoRef = useRef();
   const { setMood, setShowMoodOverlay } = useContext(AppContext);
   const [errorMsg, setErrorMsg] = useState('');
+  const [loading, setLoading] = useState(true); // Loader state
 
   const loadModels = async () => {
     const MODEL_URL = '/models';
@@ -36,13 +35,15 @@ const MoodOverlayPlayer = forwardRef((props, ref) => {
       if (videoRef.current) {
         videoRef.current.srcObject = stream;
       }
+      setLoading(false); // Loader stop after camera starts
     } catch (err) {
       console.error('❌ Error starting camera:', err);
+      setLoading(false);
     }
   };
 
   const detectMood = async () => {
-    setErrorMsg(''); // clear old errors
+    setErrorMsg('');
     if (!videoRef.current) return;
 
     const result = await faceapi
@@ -66,12 +67,20 @@ const MoodOverlayPlayer = forwardRef((props, ref) => {
   useImperativeHandle(ref, () => ({ detectMood }));
 
   useEffect(() => {
-    loadModels().then(() => startVideo());
+    (async () => {
+      setLoading(true);
+      await loadModels();
+      await startVideo();
+    })();
   }, []);
 
   return (
     <div className="containerVideo">
-      <video ref={videoRef} autoPlay muted className="video" />
+      {loading ? (
+        <div className="loader"></div>
+      ) : (
+        <video ref={videoRef} autoPlay muted className="video" />
+      )}
       {errorMsg && <p className="errorText">{errorMsg}</p>}
     </div>
   );

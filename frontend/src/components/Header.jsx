@@ -1,15 +1,17 @@
-import React, { useRef, useContext } from 'react';
+import React, { useRef, useState } from 'react';
 import './Header.scss';
 import MoodOverlayPlayer from './MoodOverlayPlayer.jsx';
 import Typewriter from "typewriter-effect";
-import { AppContext } from '../context/AppContext';
 
 const Header = () => {
   const moodPlayerRef = useRef();
+  const [loading, setLoading] = useState(false);
 
-  const detectMoodHandler = () => {
+  const detectMoodHandler = async () => {
     if (moodPlayerRef.current) {
-      moodPlayerRef.current.detectMood();
+      setLoading(true); // Loader start
+      await moodPlayerRef.current.detectMood(); // Mood detection call
+      setLoading(false); // Loader stop
     }
   };
 
@@ -33,8 +35,13 @@ const Header = () => {
         </div>
         <div className="headerRgt">
           <h4>Moody Player</h4>
-          <p>Your Current mood is being analyzed in  real time. Enjoy music Tailored to your feelings</p>
-          <button onClick={detectMoodHandler}>Start Detecting...</button>
+          <p>Your Current mood is being analyzed in real time. Enjoy music tailored to your feelings</p>
+
+          {loading ? (
+            <div className="loader"></div>
+          ) : (
+            <button onClick={detectMoodHandler}>Start Detecting...</button>
+          )}
         </div>
       </div>
     </>
