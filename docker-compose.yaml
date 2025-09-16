@@ -1,0 +1,21 @@
+version: "3"
+services:
+  backend:
+    build: ./backend
+    container_name: backend
+    networks:
+      - my-app-network
+    ports:
+      - "3000:3000"
+
+  frontend:
+    build: ./frontend
+    container_name: frontend
+    networks:
+      - my-app-network
+    ports:
+      - "5173:5173" 
+
+networks:
+  my-app-network:
+    driver: bridge
