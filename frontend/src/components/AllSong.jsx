@@ -10,7 +10,6 @@ const AllSong = () => {
 
   const togglePlay = (index) => {
     const audio = document.getElementById(`audio-${index}`);
-    
 
     if (!audio) return;
 
