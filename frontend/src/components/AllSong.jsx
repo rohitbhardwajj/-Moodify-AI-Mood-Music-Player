@@ -3,6 +3,7 @@ import "./AllSong.scss";
 import { FaPlay, FaPause } from "react-icons/fa";
 import { AppContext } from "../context/AppContext";
 
+
 const AllSong = () => {
   const { allSongData } = useContext(AppContext);
   const [playingIndex, setPlayingIndex] = useState(null);
